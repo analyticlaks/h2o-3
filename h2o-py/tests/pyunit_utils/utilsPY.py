@@ -2987,3 +2987,13 @@ def check_ignore_cols_automl(models,names,x,y):
         else:
             assert set(h2o.get_model(model).params["ignored_columns"]["actual"]) == set(names) - {y} - set(x), \
                 "ignored columns are not honored for model " + model
+
+def check_sorted_column(frame1, nrow, prob=0.5):
+    assert frame1.nrow==nrow, "Expected row number: {0}, Actual row number: {1}".format(nrow, frame1.nrow)
+
+    for rowInd in range(0, nrow-1):
+        if (random.uniform(0.0,1.0) < prob):
+            if not(math.isnan(frame1[rowInd, 0])) and not(math.isnan(frame1[rowInd+1,0])):
+                assert frame1[rowInd,0] <= frame1[rowInd+1,0], "Wrong sort order: value at row {0}: {1}, value at " \
+                                                               "row {2}: {3}".format(rowInd, frame1[rowInd,0],
+                                                                                     rowInd+1, frame1[rowInd+1,0])
