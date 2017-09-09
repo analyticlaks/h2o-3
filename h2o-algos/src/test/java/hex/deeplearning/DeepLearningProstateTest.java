@@ -384,7 +384,7 @@ public class DeepLearningProstateTest extends TestUtil {
                                                   model2.testJavaScoring(valid, pred, 1e-8,1e-6);
                                                 }
                                                 Log.info("testJavaScoring ln 386");
-                                                Assert.assertTrue(model2.testJavaScoring(valid, pred, 1e-2, 1e-2));
+                                                Assert.assertTrue(model2.testJavaScoring(valid, pred, 1e-3, 1e-3));
 
                                                 hex.ModelMetrics mm = hex.ModelMetrics.getFromDKV(model2, valid);
                                                 double error;
@@ -432,7 +432,7 @@ public class DeepLearningProstateTest extends TestUtil {
                                                 pred = model2.score(valid);
                                                 // Build a POJO, validate same results
                                                 Log.info("testJavaScoring ln 434");
-                                                 Assert.assertTrue(model2.testJavaScoring(frame, pred, 1e-8,1e-4));
+                                                 Assert.assertTrue(model2.testJavaScoring(frame, pred, 1e-3,1e-3));
                                               } finally {
                                                 if (pred != null) pred.delete();
                                               }
